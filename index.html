@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ONIBI · 鬼火 — Ramen · Neón · Noche · León, Gto.</title>
+<meta name="description" content="ONIBI es un restaurante temático de ramen y onigiri en León, Guanajuato. Cocina japonesa de calle servida en un mundo de neón, anime y noches cult. Reservas por WhatsApp.">
+<template id="__bundler_thumbnail" data-bg-color="#0a0612">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="t-glow" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="#ff2db8" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#ff2db8" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="#0a0612"/>
+    <circle cx="600" cy="400" r="380" fill="url(#t-glow)"/>
+    <text x="600" y="380" text-anchor="middle" font-family="Impact, sans-serif" font-size="220" font-weight="900" fill="#ff2db8" letter-spacing="8">ONIBI</text>
+    <text x="600" y="480" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" letter-spacing="32" fill="#39e0ff">RAMEN · NEÓN · NOCHE</text>
+    <text x="600" y="640" text-anchor="middle" font-family="Hiragino Mincho ProN, serif" font-size="80" fill="#ffd83b">鬼火</text>
+  </svg>
+</template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Yuji+Mai&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ONIBI 鬼火 — Anime Ramen Bar · León
+   Aesthetic: dark, neón, saturado, cult.
+   Build: every block contributes to "entering the place".
+   ============================================================ */
+
+:root{
+  --bg:        oklch(0.07 0.006 285);
+  --bg-deep:   oklch(0.04 0.005 285);
+  --bg-card:   oklch(0.11 0.012 285);
+  --bg-elev:   oklch(0.15 0.018 285);
+
+  --ink:       oklch(0.97 0.012 285);
+  --ink-dim:   oklch(0.78 0.020 285);
+  --ink-faint: oklch(0.55 0.020 285);
+  --ink-ghost: oklch(0.32 0.018 285);
+
+  --fucsia:        oklch(0.66 0.30 350);    /* neon pink */
+  --fucsia-soft:   oklch(0.74 0.25 350);
+  --fucsia-deep:   oklch(0.50 0.30 350);
+  --cyan:          oklch(0.82 0.18 210);    /* neon cyan */
+  --cyan-soft:     oklch(0.88 0.13 210);
+  --yellow:        oklch(0.92 0.18 95);     /* hazard */
+  --green:         oklch(0.80 0.22 145);
+
+  --rule:          color-mix(in oklab, var(--fucsia) 25%, transparent);
+  --rule-soft:     color-mix(in oklab, var(--ink) 10%, transparent);
+  --rule-cyan:     color-mix(in oklab, var(--cyan) 28%, transparent);
+
+  --display: "Bebas Neue", Impact, "Arial Narrow Bold", sans-serif;
+  --brush:   "Yuji Mai", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --sans:    "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--fucsia);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-deep)}
+::-webkit-scrollbar-thumb{background:color-mix(in oklab, var(--fucsia) 30%, var(--bg-deep))}
+
+/* ================ Atmosphere (CRT scanlines + grain) ================ */
+.atmos{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.atmos::before{
+  /* scanlines */
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,
+    rgba(0,0,0,0) 0,
+    rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.18) 2px,
+    rgba(0,0,0,0.18) 3px);
+  mix-blend-mode:multiply;opacity:.45;
+}
+.atmos::after{
+  content:"";position:absolute;inset:-20%;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 0.6 0 0 0 0 1 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:screen;opacity:.4;animation:grain 1.2s steps(4) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}25%{transform:translate(-2%,2%)}
+  50%{transform:translate(1%,-2%)}75%{transform:translate(-1%,-1%)}
+}
+
+/* ================ Type utilities ================ */
+.display{font-family:var(--display);letter-spacing:.01em;line-height:.86;text-transform:uppercase}
+.brush{font-family:var(--brush);font-style:normal}
+.mono{font-family:var(--mono)}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--fucsia);
+}
+.eyebrow::before{content:"";width:20px;height:1px;background:var(--fucsia)}
+.eyebrow.cyan{color:var(--cyan)}
+.eyebrow.cyan::before{background:var(--cyan)}
+
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;letter-spacing:.01em;line-height:.9;color:var(--ink);text-transform:uppercase}
+h1{font-size:clamp(72px, 18vw, 280px);line-height:.82;letter-spacing:.005em}
+h2{font-size:clamp(48px, 8vw, 130px)}
+h3{font-size:clamp(26px, 3vw, 42px)}
+
+.dim{color:var(--ink-dim)}.faint{color:var(--ink-faint)}.fu{color:var(--fucsia)}.cy{color:var(--cyan)}.ye{color:var(--yellow)}
+
+/* neon text glow */
+.glow{
+  text-shadow:
+    0 0 6px color-mix(in oklab, var(--fucsia) 60%, transparent),
+    0 0 18px color-mix(in oklab, var(--fucsia) 40%, transparent),
+    0 0 48px color-mix(in oklab, var(--fucsia) 25%, transparent);
+}
+.glow-cyan{
+  text-shadow:
+    0 0 6px color-mix(in oklab, var(--cyan) 70%, transparent),
+    0 0 18px color-mix(in oklab, var(--cyan) 45%, transparent),
+    0 0 48px color-mix(in oklab, var(--cyan) 25%, transparent);
+}
+.glow-yellow{
+  text-shadow:
+    0 0 6px color-mix(in oklab, var(--yellow) 70%, transparent),
+    0 0 18px color-mix(in oklab, var(--yellow) 40%, transparent);
+}
+
+/* ================ layout ================ */
+.wrap{width:100%;max-width:1380px;margin:0 auto;padding:0 36px}
+section{padding:120px 0;position:relative}
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  section{padding:80px 0}
+}
+
+/* ================ button system ================ */
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--display);font-size:18px;letter-spacing:.08em;
+  padding:18px 28px;background:var(--fucsia);color:#0a0612;
+  border:0;cursor:pointer;position:relative;text-transform:uppercase;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  transition:transform .15s ease, background .2s ease;
+}
+.btn:hover{transform:translate(-2px,-2px);background:var(--fucsia-soft)}
+.btn.lg{padding:22px 36px;font-size:22px}
+.btn.xl{padding:28px 44px;font-size:28px}
+.btn .ico{width:22px;height:22px;flex:0 0 22px}
+.btn.cyan{background:var(--cyan);color:#0a0612}
+.btn.cyan:hover{background:var(--cyan-soft)}
+.btn.ghost{
+  background:transparent;color:var(--fucsia);border:2px solid var(--fucsia);
+  clip-path:none;
+}
+.btn.ghost:hover{background:var(--fucsia);color:#0a0612}
+.btn.yellow{background:var(--yellow);color:#0a0612}
+
+/* hazard tape strip */
+.hazard{
+  position:relative;background:var(--yellow);color:#0a0612;
+  padding:16px 0;overflow:hidden;
+  border-top:1px solid #0a0612;border-bottom:1px solid #0a0612;
+}
+.hazard::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,
+    transparent 0, transparent 28px,
+    rgba(0,0,0,.12) 28px, rgba(0,0,0,.12) 36px);
+  pointer-events:none;
+}
+.hazard-track{
+  display:flex;gap:50px;white-space:nowrap;align-items:center;
+  font-family:var(--display);font-size:22px;letter-spacing:.06em;text-transform:uppercase;
+  animation:marquee 35s linear infinite;position:relative;z-index:1;
+}
+.hazard-track > span{display:inline-flex;align-items:center;gap:50px}
+.hazard-track .kanji{font-family:var(--brush);font-size:28px}
+.hazard-track .dot{width:10px;height:10px;background:#0a0612;border-radius:50%;flex:0 0 10px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================== NAV ============================== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  padding:18px 36px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  background:linear-gradient(to bottom, color-mix(in oklab, var(--bg-deep) 90%, transparent), transparent);
+  transition:padding .3s, background .3s, border-color .3s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  padding:12px 36px;background:color-mix(in oklab, var(--bg-deep) 94%, transparent);
+  border-bottom:1px solid var(--rule);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.nav .brand{display:flex;align-items:center;gap:14px}
+.nav .brand .kanji{
+  font-family:var(--brush);font-size:24px;color:var(--fucsia);
+  text-shadow:0 0 12px color-mix(in oklab, var(--fucsia) 55%, transparent);
+}
+.nav .brand .mark{font-family:var(--display);font-size:28px;letter-spacing:.06em;color:var(--ink);text-transform:uppercase}
+.nav .brand .mark em{color:var(--fucsia);font-style:normal}
+.nav .links{display:flex;gap:30px}
+.nav .links a{
+  font-family:var(--display);font-size:15px;letter-spacing:.1em;color:var(--ink-dim);
+  text-transform:uppercase;transition:color .2s;
+}
+.nav .links a:hover{color:var(--cyan)}
+.nav .cta{
+  font-family:var(--display);font-size:14px;letter-spacing:.08em;color:#0a0612;text-transform:uppercase;
+  background:var(--fucsia);padding:11px 18px;display:inline-flex;align-items:center;gap:8px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  transition:transform .15s, background .2s;
+}
+.nav .cta:hover{transform:translate(-1px,-1px);background:var(--fucsia-soft)}
+.nav .cta svg{width:16px;height:16px}
+@media (max-width:900px){
+  .nav .links{display:none}
+  .nav{padding:14px 20px}
+  .nav.scrolled{padding:10px 20px}
+}
+
+/* ============================== HERO ============================== */
+.hero{
+  min-height:100vh;padding:140px 0 60px;position:relative;display:flex;flex-direction:column;justify-content:space-between;
+  background:
+    radial-gradient(ellipse 70% 50% at 75% 30%, color-mix(in oklab, var(--fucsia) 26%, transparent), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 15% 80%, color-mix(in oklab, var(--cyan) 18%, transparent), transparent 60%),
+    var(--bg);
+  overflow:hidden;
+}
+.hero::before{
+  /* big kanji watermark */
+  content:"鬼火";position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--brush);font-size:min(60vw, 800px);line-height:.9;
+  color:transparent;
+  -webkit-text-stroke:1px color-mix(in oklab, var(--fucsia) 40%, transparent);
+  text-stroke:1px color-mix(in oklab, var(--fucsia) 40%, transparent);
+  opacity:.4;pointer-events:none;z-index:0;letter-spacing:-.05em;
+}
+.hero::after{
+  /* CRT vignette */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 100% 80% at 50% 50%, transparent 50%, rgba(0,0,0,.6) 100%);
+  z-index:1;
+}
+
+.hero-meta-top{
+  position:relative;z-index:3;display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;
+  padding-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--ink-faint);text-transform:uppercase;
+}
+.hero-meta-top .center{display:flex;gap:14px;align-items:center;color:var(--yellow)}
+.hero-meta-top .center .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 12px var(--yellow);animation:blink 1.5s infinite}
+.hero-meta-top .right{justify-self:end;text-align:right}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+
+.hero-content{
+  flex:1;position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:40px 0;
+}
+.hero-content .kanji-row{
+  font-family:var(--brush);font-size:clamp(40px, 5vw, 64px);color:var(--cyan);
+  letter-spacing:.05em;margin-bottom:18px;
+  text-shadow:0 0 18px color-mix(in oklab, var(--cyan) 50%, transparent);
+}
+.hero-content h1{
+  font-family:var(--display);
+  background:linear-gradient(180deg, #fff 0%, var(--fucsia) 60%, var(--fucsia-deep) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 30px color-mix(in oklab, var(--fucsia) 50%, transparent));
+  position:relative;
+}
+.hero-content h1 .gl{position:relative;display:inline-block}
+.hero-content h1 .gl::after{
+  content:"ONIBI";position:absolute;left:0;top:0;width:100%;
+  background:linear-gradient(180deg, transparent, var(--cyan));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  opacity:0;animation:gl 5s ease-in-out infinite;
+}
+@keyframes gl{
+  0%,90%{opacity:0;transform:translate(0,0)}
+  92%{opacity:.7;transform:translate(2px,-1px)}
+  94%{opacity:.7;transform:translate(-2px,1px)}
+  96%{opacity:0;transform:translate(0,0)}
+}
+.hero-content .tag-row{
+  display:flex;gap:14px;align-items:center;margin-top:30px;
+  font-family:var(--display);font-size:clamp(16px, 1.8vw, 26px);letter-spacing:.4em;text-transform:uppercase;
+  color:var(--ink-dim);flex-wrap:wrap;justify-content:center;
+}
+.hero-content .tag-row .sep{color:var(--fucsia);font-family:var(--brush);font-size:1.3em;letter-spacing:0}
+
+.hero-content .lede{
+  max-width:60ch;margin:32px auto 0;color:var(--ink-dim);
+  font-family:var(--sans);font-size:clamp(16px, 1.5vw, 20px);line-height:1.5;
+}
+.hero-content .lede strong{color:var(--ink);font-weight:600}
+
+.hero-actions{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+
+.hero-bottom{
+  position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:18px;
+  padding-top:30px;border-top:1px solid var(--rule);
+}
+.hero-bottom .stat{padding:14px 0}
+.hero-bottom .stat .v{font-family:var(--display);font-size:clamp(32px,3vw,48px);color:var(--cyan);line-height:.9}
+.hero-bottom .stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink-faint);text-transform:uppercase;margin-top:6px}
+
+@media (max-width:760px){
+  .hero-bottom{grid-template-columns:1fr 1fr}
+}
+
+/* floating sparks (decorative) */
+.spark{position:absolute;border-radius:50%;pointer-events:none;z-index:2}
+.spark.s1{top:18%;left:8%;width:6px;height:6px;background:var(--fucsia);box-shadow:0 0 16px var(--fucsia);animation:float 5s ease-in-out infinite}
+.spark.s2{top:30%;right:12%;width:4px;height:4px;background:var(--cyan);box-shadow:0 0 14px var(--cyan);animation:float 6s ease-in-out infinite .8s}
+.spark.s3{bottom:25%;left:18%;width:5px;height:5px;background:var(--yellow);box-shadow:0 0 16px var(--yellow);animation:float 7s ease-in-out infinite 1.4s}
+.spark.s4{bottom:30%;right:20%;width:7px;height:7px;background:var(--fucsia);box-shadow:0 0 20px var(--fucsia);animation:float 5.5s ease-in-out infinite 2s}
+.spark.s5{top:55%;left:5%;width:3px;height:3px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:float 6.5s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(20px,-30px) scale(1.4)}
+}
+
+/* ============================== Section heads ============================== */
+.s-head{
+  display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;
+  padding-bottom:40px;border-bottom:1px solid var(--rule);margin-bottom:60px;position:relative;
+}
+.s-head::after{
+  content:"";position:absolute;left:0;bottom:-1px;width:120px;height:3px;background:var(--fucsia);
+}
+.s-head .lhs .eyebrow{margin-bottom:18px}
+.s-head .lhs h2 em{font-style:normal;color:var(--fucsia)}
+.s-head .lhs h2 .brush{color:var(--cyan);font-family:var(--brush);font-size:.6em;letter-spacing:0;margin-left:12px;vertical-align:middle}
+.s-head .rhs{text-align:right;color:var(--ink-faint);font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;max-width:36ch}
+.s-head .rhs strong{display:block;color:var(--cyan);font-weight:500;margin-bottom:8px}
+@media (max-width:760px){.s-head{grid-template-columns:1fr}.s-head .rhs{text-align:left}}
+
+/* ============================== MENU ============================== */
+.menu{position:relative}
+.menu-categories{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:50px}
+.cat-pill{
+  font-family:var(--display);font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+  padding:10px 18px;border:1px solid var(--rule);color:var(--ink-dim);
+  display:inline-flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s;
+}
+.cat-pill .ja{font-family:var(--brush);font-size:18px;color:var(--cyan)}
+.cat-pill.active{border-color:var(--fucsia);color:var(--fucsia);background:color-mix(in oklab, var(--fucsia) 10%, transparent)}
+.cat-pill:hover{border-color:var(--fucsia);color:var(--ink)}
+
+.menu-grid{
+  display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:auto;gap:18px;
+}
+.dish{
+  position:relative;background:var(--bg-card);border:1px solid var(--rule-soft);overflow:hidden;
+  display:flex;flex-direction:column;transition:border-color .25s, transform .25s;
+}
+.dish:hover{border-color:var(--fucsia);transform:translateY(-3px)}
+.dish .photo{
+  aspect-ratio:4/3;position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 45%, color-mix(in oklab, var(--fucsia) 22%, transparent), transparent 70%),
+    linear-gradient(135deg, oklch(0.14 0.04 320), oklch(0.08 0.02 280));
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--rule);
+}
+.dish .photo .ja{
+  font-family:var(--brush);font-size:clamp(80px,8vw,140px);
+  color:color-mix(in oklab, var(--fucsia) 70%, transparent);
+  text-shadow:0 0 30px color-mix(in oklab, var(--fucsia) 50%, transparent);
+  line-height:1;
+}
+.dish .photo .ph-caption{
+  position:absolute;left:14px;right:14px;bottom:14px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);
+  border:1px dashed color-mix(in oklab, var(--cyan) 45%, transparent);padding:7px 10px;
+  background:color-mix(in oklab, var(--bg-deep) 70%, transparent);
+}
+.dish .photo .scan{
+  position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--yellow);
+  background:color-mix(in oklab, var(--bg-deep) 80%, transparent);padding:5px 10px;border:1px solid var(--yellow);
+}
+.dish .photo .tag{
+  position:absolute;top:14px;left:14px;font-family:var(--display);font-size:12px;letter-spacing:.1em;
+  background:var(--fucsia);color:#0a0612;padding:5px 9px;text-transform:uppercase;
+}
+.dish .photo .tag.cyan{background:var(--cyan)}
+.dish .photo .tag.yel{background:var(--yellow)}
+.dish .photo::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 3px);
+  opacity:.3;mix-blend-mode:multiply;pointer-events:none;
+}
+.dish .body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.dish .body .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.dish .body h3{font-family:var(--display);font-size:30px;line-height:.95;letter-spacing:.02em}
+.dish .body h3 .ja{font-family:var(--brush);font-size:.7em;letter-spacing:0;color:var(--cyan);margin-left:8px;text-transform:none}
+.dish .body .price{font-family:var(--display);font-size:30px;color:var(--fucsia);white-space:nowrap;letter-spacing:.02em}
+.dish .body .price .mxn{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-left:6px;letter-spacing:.18em}
+.dish .body p{font-family:var(--sans);font-size:14px;color:var(--ink-dim);line-height:1.45;max-width:42ch}
+.dish .body .ingredients{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;
+  display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--rule-soft);
+}
+.dish .body .ingredients .i::before{content:"+";color:var(--fucsia);margin-right:4px}
+
+.dish.d1{grid-column:span 7}
+.dish.d2{grid-column:span 5}
+.dish.d3{grid-column:span 4}
+.dish.d4{grid-column:span 4}
+.dish.d5{grid-column:span 4}
+.dish.d6{grid-column:span 6}
+.dish.d7{grid-column:span 6}
+@media (max-width:1000px){
+  .dish.d1,.dish.d2,.dish.d3,.dish.d4,.dish.d5,.dish.d6,.dish.d7{grid-column:span 6}
+}
+@media (max-width:640px){
+  .dish.d1,.dish.d2,.dish.d3,.dish.d4,.dish.d5,.dish.d6,.dish.d7{grid-column:span 12}
+}
+
+/* ============================== GALLERY ============================== */
+.gallery{
+  background:var(--bg-deep);position:relative;overflow:hidden;
+}
+.gallery::before{
+  content:"店"; position:absolute;top:50%;right:-100px;transform:translateY(-50%);
+  font-family:var(--brush);font-size:600px;color:transparent;
+  -webkit-text-stroke:1px color-mix(in oklab,var(--cyan) 25%, transparent);
+  opacity:.5;line-height:1;pointer-events:none;
+}
+.gal-grid{
+  display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:140px;gap:14px;position:relative;z-index:2;
+}
+.tile{
+  position:relative;overflow:hidden;border:1px solid var(--rule-soft);
+  background:
+    radial-gradient(ellipse 70% 60% at var(--gx,50%) var(--gy,40%), var(--gc, color-mix(in oklab, var(--fucsia) 22%, transparent)), transparent 70%),
+    linear-gradient(135deg, oklch(0.12 0.04 320), oklch(0.06 0.02 280));
+  display:flex;align-items:flex-end;justify-content:flex-start;padding:18px;
+  transition:transform .3s ease, border-color .3s;
+  isolation:isolate;
+}
+/* Imagen del tile — duotone neón sobre la foto manga */
+.tile .bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:var(--img);background-size:cover;background-position:var(--bgp, center);
+  filter:grayscale(1) contrast(1.15) brightness(.7);
+  mix-blend-mode:luminosity;
+  opacity:.85;
+  transition:transform .8s ease, filter .4s ease;
+}
+.tile:hover .bg{transform:scale(1.06);filter:grayscale(1) contrast(1.25) brightness(.85)}
+.tile:hover{transform:scale(1.01);border-color:var(--fucsia)}
+.tile::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 3px),
+    radial-gradient(ellipse 70% 60% at var(--gx,50%) var(--gy,40%), var(--gc, color-mix(in oklab, var(--fucsia) 38%, transparent)), transparent 70%);
+  pointer-events:none;mix-blend-mode:screen;
+}
+.tile::after{
+  content:"";position:absolute;top:10px;right:10px;width:14px;height:14px;border:1px solid var(--cyan);z-index:3;
+}
+.tile .ja{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+  font-family:var(--brush);font-size:clamp(40px,6vw,90px);
+  color:color-mix(in oklab, var(--ink) 35%, transparent);text-shadow:0 0 20px rgba(0,0,0,.8);
+  mix-blend-mode:overlay;pointer-events:none;
+}
+.tile .info{
+  position:relative;z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  color:var(--ink);text-transform:uppercase;line-height:1.4;
+  background:color-mix(in oklab, var(--bg-deep) 75%, transparent);padding:8px 10px;
+  border-left:2px solid var(--fucsia);
+}
+.tile .info b{color:var(--fucsia);font-weight:500;display:block;font-family:var(--display);font-size:14px;letter-spacing:.04em}
+.tile .stamp{
+  position:absolute;top:12px;left:12px;z-index:2;
+  font-family:var(--mono);font-size:9px;color:var(--yellow);letter-spacing:.22em;
+}
+.tile.t1{grid-column:span 5;grid-row:span 3; --gc: color-mix(in oklab, var(--fucsia) 28%, transparent)}
+.tile.t2{grid-column:span 4;grid-row:span 2; --gc: color-mix(in oklab, var(--cyan) 22%, transparent); --gx:30%;--gy:60%}
+.tile.t3{grid-column:span 3;grid-row:span 2; --gc: color-mix(in oklab, var(--yellow) 18%, transparent)}
+.tile.t4{grid-column:span 3;grid-row:span 2; --gc: color-mix(in oklab, var(--green) 18%, transparent)}
+.tile.t5{grid-column:span 4;grid-row:span 3; --gc: color-mix(in oklab, var(--fucsia) 22%, transparent); --gx:70%;--gy:30%}
+.tile.t6{grid-column:span 4;grid-row:span 2; --gc: color-mix(in oklab, var(--cyan) 26%, transparent)}
+.tile.t7{grid-column:span 4;grid-row:span 2; --gc: color-mix(in oklab, var(--fucsia) 18%, transparent)}
+.tile.t8{grid-column:span 8;grid-row:span 2; --gc: color-mix(in oklab, var(--cyan) 18%, transparent); --gx:50%;--gy:50%}
+
+@media (max-width:900px){
+  .gal-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:110px}
+  .tile.t1,.tile.t5{grid-column:span 6;grid-row:span 3}
+  .tile.t2,.tile.t3,.tile.t4,.tile.t6,.tile.t7{grid-column:span 3;grid-row:span 2}
+  .tile.t8{grid-column:span 6;grid-row:span 2}
+}
+
+/* ============================== SHRINE / FILM STRIP ============================== */
+.shrine{padding:0;position:relative;border-block:1px solid var(--rule)}
+.shrine-strip{
+  display:grid;grid-template-columns:1.1fr .9fr 1.1fr .9fr;gap:0;
+  height:clamp(180px, 28vw, 320px);position:relative;overflow:hidden;
+}
+.shrine-cell{
+  position:relative;overflow:hidden;isolation:isolate;
+  border-right:1px solid var(--rule-soft);
+}
+.shrine-cell:last-child{border-right:none}
+.shrine-cell .bg{
+  position:absolute;inset:0;
+  background-image:var(--img);background-size:cover;background-position:var(--bgp,center);
+  filter:grayscale(1) contrast(1.2) brightness(.65);
+  transition:transform 1.2s ease, filter .4s ease;
+  z-index:0;
+}
+.shrine-cell:hover .bg{transform:scale(1.08);filter:grayscale(1) contrast(1.3) brightness(.9)}
+.shrine-cell::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.22) 2px, rgba(0,0,0,.22) 3px),
+    linear-gradient(180deg, transparent 55%, color-mix(in oklab, var(--bg-deep) 92%, transparent));
+}
+.shrine-cell::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at var(--gx,50%) var(--gy,50%), var(--gc, color-mix(in oklab, var(--fucsia) 30%, transparent)), transparent 70%);
+  mix-blend-mode:screen;
+}
+.shrine-cell .tag{
+  position:absolute;left:14px;bottom:14px;z-index:3;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink);
+  background:color-mix(in oklab, var(--bg-deep) 80%, transparent);
+  padding:6px 10px;border-left:2px solid var(--fucsia);
+}
+.shrine-cell .num{
+  position:absolute;top:12px;left:14px;z-index:3;
+  font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--yellow);
+}
+.shrine-cell .ja{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+  font-family:var(--brush);font-size:clamp(36px,5vw,80px);
+  color:color-mix(in oklab, var(--ink) 40%, transparent);
+  text-shadow:0 0 20px rgba(0,0,0,.9);mix-blend-mode:overlay;pointer-events:none;
+}
+.shrine-cell.c1{--gc:color-mix(in oklab, var(--fucsia) 38%, transparent);--gx:30%;--gy:40%}
+.shrine-cell.c2{--gc:color-mix(in oklab, var(--cyan) 32%, transparent);--gx:60%;--gy:35%}
+.shrine-cell.c3{--gc:color-mix(in oklab, var(--yellow) 22%, transparent);--gx:50%;--gy:55%}
+.shrine-cell.c4{--gc:color-mix(in oklab, var(--fucsia) 30%, transparent);--gx:70%;--gy:40%}
+
+.shrine-caption{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:18px 28px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  color:var(--ink-dim);text-transform:uppercase;
+  background:var(--bg-deep);border-top:1px solid var(--rule-soft);
+}
+.shrine-caption b{color:var(--fucsia);font-weight:500}
+.shrine-caption .brush{font-family:var(--brush);font-size:18px;color:var(--cyan);letter-spacing:0}
+
+@media (max-width:760px){
+  .shrine-strip{grid-template-columns:1fr 1fr;height:auto}
+  .shrine-cell{height:200px;border-right:none;border-bottom:1px solid var(--rule-soft)}
+  .shrine-cell:nth-child(odd){border-right:1px solid var(--rule-soft)}
+}
+
+/* ============================== EVENTS ============================== */
+.events{position:relative}
+.event-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.event{
+  position:relative;background:var(--bg-card);
+  border:1px solid var(--rule);
+  padding:0;display:flex;flex-direction:column;overflow:hidden;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+}
+.event::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--fucsia);
+}
+.event.cy::before{background:var(--cyan)}
+.event.ye::before{background:var(--yellow)}
+.event .head{
+  padding:24px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+  border-bottom:1px solid var(--rule-soft);
+}
+.event .head .ja-big{
+  font-family:var(--brush);font-size:48px;color:var(--fucsia);line-height:1;
+  text-shadow:0 0 18px color-mix(in oklab, var(--fucsia) 50%, transparent);
+}
+.event.cy .head .ja-big{color:var(--cyan);text-shadow:0 0 18px color-mix(in oklab, var(--cyan) 50%, transparent)}
+.event.ye .head .ja-big{color:var(--yellow);text-shadow:0 0 18px color-mix(in oklab, var(--yellow) 50%, transparent)}
+.event .head .when{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;text-align:right;
+}
+.event .head .when strong{color:var(--ink);font-family:var(--display);font-size:18px;letter-spacing:.04em;display:block;margin-top:4px}
+.event .body{padding:24px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
+.event h3{font-family:var(--display);font-size:clamp(28px,3vw,42px);line-height:.95}
+.event h3 .ja{font-family:var(--brush);font-size:.5em;color:var(--cyan);margin-left:10px;letter-spacing:0;text-transform:none}
+.event p{font-family:var(--sans);font-size:15px;color:var(--ink-dim);line-height:1.5;max-width:50ch}
+.event ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:12px;color:var(--ink-dim);letter-spacing:.1em}
+.event ul li{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:baseline}
+.event ul li::before{content:"›";color:var(--fucsia);font-family:var(--display);font-size:18px}
+.event.cy ul li::before{color:var(--cyan)}
+.event.ye ul li::before{color:var(--yellow)}
+.event .foot{
+  display:flex;justify-content:space-between;align-items:center;padding:18px 28px;
+  border-top:1px solid var(--rule-soft);background:var(--bg-deep);margin-top:auto;
+}
+.event .foot .cap{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase}
+.event .foot .cap strong{color:var(--fucsia)}
+.event.cy .foot .cap strong{color:var(--cyan)}
+.event.ye .foot .cap strong{color:var(--yellow)}
+
+@media (max-width:900px){.event-grid{grid-template-columns:1fr}}
+
+/* ============================== RESERVE + LOCATION ============================== */
+.reserve{
+  background:linear-gradient(180deg, var(--bg), var(--bg-deep));
+}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.res-info h2 em{color:var(--cyan)}
+.res-info .lede{font-family:var(--sans);font-size:18px;color:var(--ink-dim);line-height:1.5;margin-top:24px;max-width:44ch}
+.res-info .lede strong{color:var(--ink);font-weight:600}
+
+.res-meta{
+  margin-top:30px;display:flex;flex-direction:column;gap:14px;
+}
+.res-meta .row{
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule-soft);
+}
+.res-meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--fucsia);text-transform:uppercase}
+.res-meta .v{font-family:var(--display);font-size:18px;color:var(--ink);letter-spacing:.04em;text-transform:uppercase}
+.res-meta .v small{display:block;font-family:var(--sans);font-size:13px;color:var(--ink-faint);letter-spacing:.02em;margin-top:4px;text-transform:none}
+
+.res-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+
+/* location card */
+.loc-card{
+  background:var(--bg-card);border:1px solid var(--rule);position:relative;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.loc-card .map{
+  position:relative;aspect-ratio:4/3;background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, color-mix(in oklab, var(--fucsia) 8%, transparent), transparent 70%),
+    var(--bg-deep);
+}
+.loc-card .map svg{width:100%;height:100%;display:block}
+.loc-card .map::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 3px);
+  pointer-events:none;opacity:.4;
+}
+.loc-card .map .meta-top{
+  position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;
+}
+.loc-card .map .meta-top span:first-child{display:flex;align-items:center;gap:8px}
+.loc-card .map .meta-top .dot{width:6px;height:6px;border-radius:50%;background:var(--fucsia);box-shadow:0 0 12px var(--fucsia);animation:blink 1.5s infinite}
+.loc-card .info{padding:24px 28px;display:flex;flex-direction:column;gap:18px}
+.loc-card .info .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.loc-card .info h3{font-family:var(--display);font-size:26px;letter-spacing:.04em}
+.loc-card .info .badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--fucsia);
+  border:1px solid var(--fucsia);padding:5px 9px;text-transform:uppercase;
+}
+.loc-card .info p{font-family:var(--sans);font-size:14px;color:var(--ink-dim);line-height:1.5}
+.loc-card .info .lines{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-top:14px;border-top:1px solid var(--rule-soft)}
+.loc-card .info .lines .row{display:flex;flex-direction:column;gap:4px}
+.loc-card .info .lines .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink-faint);text-transform:uppercase}
+.loc-card .info .lines .v{font-family:var(--display);font-size:16px;letter-spacing:.04em;color:var(--ink)}
+
+@media (max-width:900px){.res-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ============================== FINAL CTA ============================== */
+.final{
+  background:var(--bg-deep);padding:130px 0 110px;text-align:center;position:relative;overflow:hidden;
+}
+.final::before{
+  content:"鬼";position:absolute;left:-100px;top:50%;transform:translateY(-50%);
+  font-family:var(--brush);font-size:600px;line-height:1;color:transparent;
+  -webkit-text-stroke:1px color-mix(in oklab, var(--fucsia) 30%, transparent);opacity:.3;
+}
+.final::after{
+  content:"火";position:absolute;right:-100px;top:50%;transform:translateY(-50%);
+  font-family:var(--brush);font-size:600px;line-height:1;color:transparent;
+  -webkit-text-stroke:1px color-mix(in oklab, var(--cyan) 30%, transparent);opacity:.3;
+}
+.final .inner{position:relative;z-index:2;max-width:1000px;margin:0 auto}
+.final h2{font-size:clamp(60px,11vw,180px);line-height:.86}
+.final h2 em{font-style:normal;color:var(--fucsia)}
+.final h2 .cy{color:var(--cyan)}
+.final p{font-family:var(--sans);font-size:clamp(18px,1.6vw,22px);color:var(--ink-dim);max-width:56ch;margin:28px auto 0}
+.final .open-now{
+  margin-top:34px;display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.24em;color:var(--yellow);text-transform:uppercase;
+}
+.final .open-now .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 14px var(--yellow);animation:blink 1.4s infinite}
+.final .ctas{display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+
+/* ============================== FOOTER ============================== */
+footer{padding:50px 0 40px;background:var(--bg);border-top:1px solid var(--rule)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;align-items:start}
+footer .brand-block .mark{font-family:var(--display);font-size:32px;letter-spacing:.06em;color:var(--fucsia);margin-bottom:8px;display:inline-block}
+footer .brand-block .kj{font-family:var(--brush);font-size:24px;color:var(--cyan);margin-left:10px}
+footer .brand-block p{font-family:var(--sans);font-size:14px;color:var(--ink-dim);line-height:1.5;max-width:32ch;margin-top:14px}
+footer h4{font-family:var(--display);font-size:14px;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-bottom:16px;font-weight:400}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+footer ul a, footer ul .item{font-family:var(--sans);font-size:14px;color:var(--ink-dim);transition:color .2s}
+footer ul a:hover{color:var(--fucsia)}
+footer .legal{
+  display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:40px;padding-top:24px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink-faint);text-transform:uppercase;
+}
+@media (max-width:900px){
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+  footer .legal{flex-direction:column;align-items:flex-start;gap:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="atmos" aria-hidden="true"></div>
+
+<!-- icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 .03 5.37.03 12c0 2.11.55 4.18 1.6 6L0 24l6.2-1.62A11.96 11.96 0 0 0 12 24c6.63 0 11.97-5.37 11.97-12 0-3.2-1.25-6.21-3.45-8.52ZM12 21.83c-1.86 0-3.69-.5-5.27-1.45l-.38-.22-3.68.96.98-3.6-.25-.37A9.86 9.86 0 0 1 2.17 12c0-5.43 4.4-9.83 9.83-9.83 2.63 0 5.1 1.02 6.95 2.88a9.78 9.78 0 0 1 2.88 6.95c0 5.43-4.4 9.83-9.83 9.83Zm5.4-7.36c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.08 3.18 5.04 4.46.7.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.34Z"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav" id="nav">
+  <a class="brand" href="#top">
+    <span class="kanji">鬼火</span>
+    <span class="mark">ON<em>·</em>IBI</span>
+  </a>
+  <div class="links">
+    <a href="#menu">Menú</a>
+    <a href="#galeria">El lugar</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#reserva">Reservar</a>
+    <a href="#ubicacion">Ubicación</a>
+  </div>
+  <a href="#reserva" class="cta wa-cta" data-msg="¡Hola ONIBI! Quiero reservar mesa">
+    <svg><use href="#i-wa"/></svg> Reservar
+  </a>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero" id="top">
+  <span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span>
+  <span class="spark s4"></span><span class="spark s5"></span>
+
+  <div class="wrap">
+    <div class="hero-meta-top">
+      <div class="left">LEÓN · GTO · MX // EST. 2024</div>
+      <div class="center"><span class="dot"></span> ABIERTO · MAR–DOM 18:00 → 01:00</div>
+      <div class="right">REC. 24FPS · NOCHE 047</div>
+    </div>
+  </div>
+
+  <div class="wrap hero-content">
+    <div class="kanji-row brush">鬼火・らーめん・夜</div>
+    <h1 class="display"><span class="gl">ONIBI</span></h1>
+    <div class="tag-row">
+      <span>Ramen</span><span class="sep brush">・</span>
+      <span class="cy">Neón</span><span class="sep brush">・</span>
+      <span>Noche</span>
+    </div>
+    <p class="lede">
+      Restaurante temático de ramen, onigiri y comida japonesa de calle en León, Gto. <strong>El lugar es la película; tú entras a la escena.</strong> Cocina abierta hasta tarde, ambiente cult, banda sonora curada por la casa.
+    </p>
+    <div class="hero-actions">
+      <a href="#reserva" class="btn xl wa-cta" data-msg="¡Hola ONIBI! Quiero reservar mesa">
+        <svg class="ico"><use href="#i-wa"/></svg> Reservar por WhatsApp
+      </a>
+      <a href="#menu" class="btn ghost">Ver el menú <svg class="ico" width="18" height="18"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-bottom">
+      <div class="stat"><div class="v glow-cyan">24</div><div class="l">Platillos en carta</div></div>
+      <div class="stat"><div class="v glow-cyan">7</div><div class="l">Noches temáticas / mes</div></div>
+      <div class="stat"><div class="v glow-cyan">14</div><div class="l">Mesas · capacidad 48</div></div>
+      <div class="stat"><div class="v glow-cyan">★ 4.9</div><div class="l">Reseñas Google · 412</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- hazard strip -->
+<div class="hazard" aria-hidden="true">
+  <div class="hazard-track">
+    <span>
+      RAMEN HASTA LA 01:00 <span class="dot"></span> <span class="kanji">鬼火</span> ・ ONI-BI ・ 鬼火 <span class="dot"></span>
+      TORNEOS DE ANIME LOS JUEVES <span class="dot"></span> KARAOKE LOS DOMINGOS <span class="dot"></span>
+      <span class="kanji">注文</span> ORDER UP <span class="dot"></span>
+      COSPLAY · 15% OFF <span class="dot"></span>
+    </span>
+    <span>
+      RAMEN HASTA LA 01:00 <span class="dot"></span> <span class="kanji">鬼火</span> ・ ONI-BI ・ 鬼火 <span class="dot"></span>
+      TORNEOS DE ANIME LOS JUEVES <span class="dot"></span> KARAOKE LOS DOMINGOS <span class="dot"></span>
+      <span class="kanji">注文</span> ORDER UP <span class="dot"></span>
+      COSPLAY · 15% OFF <span class="dot"></span>
+    </span>
+  </div>
+</div>
+
+<!-- ============================== MENU ============================== -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="lhs">
+        <span class="eyebrow">Carta · MENU 01</span>
+        <h2>El <em>tazón</em>. <span class="brush">献立</span></h2>
+      </div>
+      <div class="rhs">
+        <strong>Cocina abierta hasta la 01:00</strong>
+        Ramen, onigiri, side dishes y postres. Especial cambia cada noche temática.
+      </div>
+    </div>
+
+    <div class="menu-categories">
+      <button class="cat-pill active"><span class="ja">麺</span> Ramen</button>
+      <button class="cat-pill"><span class="ja">飯</span> Onigiri</button>
+      <button class="cat-pill"><span class="ja">串</span> Sides</button>
+      <button class="cat-pill"><span class="ja">甘</span> Dulces</button>
+      <button class="cat-pill"><span class="ja">飲</span> Bebidas</button>
+    </div>
+
+    <div class="menu-grid">
+
+      <article class="dish d1">
+        <div class="photo">
+          <span class="tag">BESTSELLER</span>
+          <span class="scan">No. 01 / 麺</span>
+          <span class="ja brush">鬼</span>
+          <span class="ph-caption">[ foto cenital · tazón ramen tonkotsu · vapor visible · neón fucsia sobre madera negra ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Onibi Tonkotsu<span class="ja brush">鬼火</span></h3>
+            <span class="price">$189<span class="mxn">MXN</span></span>
+          </div>
+          <p>Caldo cremoso de hueso de cerdo cocinado 18 horas. Tare de soya negra ahumada, chashu doble curado, ajitama 6 minutos, nori, cebollín, brote de bambú. El platillo emblema.</p>
+          <div class="ingredients">
+            <span class="i">tonkotsu</span><span class="i">chashu doble</span><span class="i">ajitama</span><span class="i">brote bambú</span><span class="i">nori</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish d2">
+        <div class="photo">
+          <span class="tag cyan">PICANTE 🔥</span>
+          <span class="scan">No. 02 / 麺</span>
+          <span class="ja brush">辛</span>
+          <span class="ph-caption">[ ramen rojo · aceite picante flotando · cilantro sobre fondo negro ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Akai Karai<span class="ja brush">赤辛</span></h3>
+            <span class="price">$179<span class="mxn">MXN</span></span>
+          </div>
+          <p>Ramen rojo. Tare de miso picante con aceite de chile japonés tōgarashi. Cerdo deshebrado, choclo dulce, cebolla blanca, ajo crujiente.</p>
+          <div class="ingredients">
+            <span class="i">miso picante</span><span class="i">tōgarashi</span><span class="i">cerdo</span><span class="i">ajo</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish d3">
+        <div class="photo">
+          <span class="tag yel">VEG</span>
+          <span class="scan">No. 03 / 麺</span>
+          <span class="ja brush">蔬</span>
+          <span class="ph-caption">[ ramen claro con champiñones · luz cyan ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Mori<span class="ja brush">森</span></h3>
+            <span class="price">$159<span class="mxn">MXN</span></span>
+          </div>
+          <p>Caldo claro de hongos shiitake y kombu. Tofu marinado, mix de hongos shimeji, espinaca, alga wakame, ajitama vegetal.</p>
+          <div class="ingredients">
+            <span class="i">shiitake</span><span class="i">kombu</span><span class="i">tofu</span><span class="i">shimeji</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish d4">
+        <div class="photo">
+          <span class="scan">No. 04 / 飯</span>
+          <span class="ja brush">梅</span>
+          <span class="ph-caption">[ trío de onigiri en tabla negra · luz lateral ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Trío Onigiri<span class="ja brush">三角</span></h3>
+            <span class="price">$129<span class="mxn">MXN</span></span>
+          </div>
+          <p>Tres bolas de arroz triangular, prensadas a mano. Salmón teriyaki, atún picante con mayo japonesa, umeboshi con shiso.</p>
+          <div class="ingredients">
+            <span class="i">salmón</span><span class="i">atún</span><span class="i">umeboshi</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish d5">
+        <div class="photo">
+          <span class="tag">NUEVO</span>
+          <span class="scan">No. 05 / 飯</span>
+          <span class="ja brush">焼</span>
+          <span class="ph-caption">[ onigiri tostado en plancha · brasa visible ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Yaki Onigiri<span class="ja brush">焼</span></h3>
+            <span class="price">$95<span class="mxn">MXN</span></span>
+          </div>
+          <p>Onigiri sellado en plancha hasta dorar. Glaseado en soya tare casera. Servido con un toque de wasabi fresco.</p>
+          <div class="ingredients">
+            <span class="i">arroz tostado</span><span class="i">soya tare</span><span class="i">wasabi</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish d6">
+        <div class="photo">
+          <span class="scan">No. 06 / 串</span>
+          <span class="ja brush">餃</span>
+          <span class="ph-caption">[ gyozas en plato negro · vapor + neón cian ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Gyozas de la casa<span class="ja brush">餃子</span></h3>
+            <span class="price">$135<span class="mxn">MXN</span></span>
+          </div>
+          <p>Seis gyozas plisadas a mano, rellenas de cerdo, repollo y jengibre. Selladas en plancha con base crujiente. Salsa ponzu casera.</p>
+          <div class="ingredients">
+            <span class="i">cerdo</span><span class="i">repollo</span><span class="i">ponzu</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish d7">
+        <div class="photo">
+          <span class="tag cyan">SPECIAL</span>
+          <span class="scan">No. 07 / 甘</span>
+          <span class="ja brush">甘</span>
+          <span class="ph-caption">[ mochi helado · fucsia + matcha sobre roca negra ]</span>
+        </div>
+        <div class="body">
+          <div class="top">
+            <h3>Mochi Trío<span class="ja brush">餅</span></h3>
+            <span class="price">$89<span class="mxn">MXN</span></span>
+          </div>
+          <p>Tres mochi helados artesanales. Sabores rotativos: matcha, sakura, sésamo negro, ube, frijol rojo. Pregunta por los del día.</p>
+          <div class="ingredients">
+            <span class="i">matcha</span><span class="i">sakura</span><span class="i">sésamo negro</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== GALLERY ============================== -->
+<section class="gallery" id="galeria">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="lhs">
+        <span class="eyebrow cyan">El lugar // 場所</span>
+        <h2>El ambiente <em class="cy">ES</em> el producto. <span class="brush">店内</span></h2>
+      </div>
+      <div class="rhs">
+        <strong>14 mesas · cocina abierta</strong>
+        Paneles iluminados con neón, pantallas con anime, banda sonora curada noche por noche.
+      </div>
+    </div>
+
+    <div class="gal-grid">
+      <div class="tile t1" style="--img:url('img/manga-01.jpg');--bgp:center top">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 01 / IMG ]</span>
+        <span class="ja brush">店</span>
+        <div class="info"><b>Sala principal</b>Vista general con neón fucsia y luces colgantes industriales.</div>
+      </div>
+      <div class="tile t2" style="--img:url('img/manga-02.jpg');--bgp:center 20%">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 02 / IMG ]</span>
+        <span class="ja brush">麺</span>
+        <div class="info"><b>Cocina abierta</b>Plancha + ollas de caldo. Show desde la barra.</div>
+      </div>
+      <div class="tile t3" style="--img:url('img/manga-03.jpg');--bgp:center">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 03 / IMG ]</span>
+        <span class="ja brush">夜</span>
+        <div class="info"><b>Barra de noche</b>10 sillas frente al chef.</div>
+      </div>
+      <div class="tile t4" style="--img:url('img/manga-04.jpg');--bgp:center 30%">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 04 / IMG ]</span>
+        <span class="ja brush">壁</span>
+        <div class="info"><b>Mural anime</b>Encargo a artista local.</div>
+      </div>
+      <div class="tile t5" style="--img:url('img/manga-05.jpg');--bgp:center top">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 05 / IMG ]</span>
+        <span class="ja brush">音</span>
+        <div class="info"><b>Cabina DJ</b>Vinilo japonés, city pop, ost de anime.</div>
+      </div>
+      <div class="tile t6" style="--img:url('img/manga-06.jpg');--bgp:center 25%">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 06 / IMG ]</span>
+        <span class="ja brush">客</span>
+        <div class="info"><b>Mesa cosplay</b>Mesa privada con luz UV.</div>
+      </div>
+      <div class="tile t7" style="--img:url('img/manga-07.jpg');--bgp:center 30%">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 07 / IMG ]</span>
+        <span class="ja brush">外</span>
+        <div class="info"><b>Entrada / linterna</b>Fachada con noren rojo y linterna.</div>
+      </div>
+      <div class="tile t8" style="--img:url('img/manga-08.jpg');--bgp:center 40%">
+        <div class="bg" aria-hidden="true"></div>
+        <span class="stamp">[ 08 / IMG ]</span>
+        <span class="ja brush">画</span>
+        <div class="info"><b>Pantalla 4m</b>Proyección de anime continua.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SHRINE / FILM STRIP ============================== -->
+<section class="shrine" aria-label="Cinema strip">
+  <div class="shrine-strip">
+    <div class="shrine-cell c1" style="--img:url('img/manga-09.jpg');--bgp:center 25%">
+      <div class="bg" aria-hidden="true"></div>
+      <span class="num">[ FRAME 01 ]</span>
+      <span class="ja brush">魂</span>
+      <span class="tag">EL ESPÍRITU</span>
+    </div>
+    <div class="shrine-cell c2" style="--img:url('img/banner-02.jpg');--bgp:center">
+      <div class="bg" aria-hidden="true"></div>
+      <span class="num">[ FRAME 02 ]</span>
+      <span class="ja brush">視</span>
+      <span class="tag">LA MIRADA</span>
+    </div>
+    <div class="shrine-cell c3" style="--img:url('img/manga-10.jpg');--bgp:center 30%">
+      <div class="bg" aria-hidden="true"></div>
+      <span class="num">[ FRAME 03 ]</span>
+      <span class="ja brush">力</span>
+      <span class="tag">LA FUERZA</span>
+    </div>
+    <div class="shrine-cell c4" style="--img:url('img/banner-01.jpg');--bgp:center">
+      <div class="bg" aria-hidden="true"></div>
+      <span class="num">[ FRAME 04 ]</span>
+      <span class="ja brush">夢</span>
+      <span class="tag">EL SUEÑO</span>
+    </div>
+  </div>
+  <div class="shrine-caption">
+    <span><b>REC · 24FPS</b> &nbsp;//&nbsp; Tributo a las noches de anime</span>
+    <span class="brush">鬼火 影像</span>
+    <span>SCENE 047 / 124</span>
+  </div>
+</section>
+
+<!-- ============================== EVENTS ============================== -->
+<section class="events" id="eventos">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="lhs">
+        <span class="eyebrow">Eventos · 行事</span>
+        <h2>Noches que <em>solo pasan aquí</em>. <span class="brush">特別</span></h2>
+      </div>
+      <div class="rhs">
+        <strong>Calendario · Mes en curso</strong>
+        Entrada gratis con consumo. Reservar lugar 24 h antes recomendado.
+      </div>
+    </div>
+
+    <div class="event-grid">
+
+      <article class="event">
+        <div class="head">
+          <div class="ja-big brush">闘</div>
+          <div class="when">JUE</div>
+        </div>
+        <div class="body">
+          <h3>Anime Trivia Battle<span class="ja brush">トリビア</span></h3>
+          <p>Torneo semanal de trivia anime. Equipos de 4. Categorías rotativas: shōnen, isekai, retro 80s, Studio Ghibli, mecha.</p>
+          <ul>
+            <li>Equipos de hasta 4 personas</li>
+            <li>3 rondas · 60 preguntas</li>
+            <li>Premio: cena para 4 + merch</li>
+            <li>Inscripción $80 por persona</li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cap">Cap. <strong>32 jugadores</strong> · 20:30 hrs</span>
+          <a class="wa-cta mono" data-msg="¡Hola! Quiero apartar lugar para Anime Trivia (Jueves)" style="color:var(--fucsia);letter-spacing:.2em;font-size:11px;text-transform:uppercase;border-bottom:1px solid var(--fucsia);padding-bottom:3px">Apartar lugar →</a>
+        </div>
+      </article>
+
+      <article class="event cy">
+        <div class="head">
+          <div class="ja-big brush">歌</div>
+          <div class="when">DOM</div>
+        </div>
+        <div class="body">
+          <h3>Karaoke OST Night<span class="ja brush">カラオケ</span></h3>
+          <p>Domingo de cantar openings y endings de anime. Catálogo de 500+ canciones. Cocina abierta toda la noche.</p>
+          <ul>
+            <li>500+ openings y endings</li>
+            <li>Pantalla principal con letra</li>
+            <li>Premio mejor performance</li>
+            <li>Sin cover · 100% propinas al cantante</li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cap">Cap. <strong>48 personas</strong> · 20:00 hrs</span>
+          <a class="wa-cta mono" data-msg="¡Hola! Quiero apartar lugar para Karaoke OST (Domingo)" style="color:var(--cyan);letter-spacing:.2em;font-size:11px;text-transform:uppercase;border-bottom:1px solid var(--cyan);padding-bottom:3px">Apartar lugar →</a>
+        </div>
+      </article>
+
+      <article class="event ye">
+        <div class="head">
+          <div class="ja-big brush">仮装</div>
+          <div class="when">SÁB · ÚLTIMO DEL MES</div>
+        </div>
+        <div class="body">
+          <h3>Cosplay Friday Night<span class="ja brush">パーティー</span></h3>
+          <p>Fiesta mensual de cosplay. Bienvenido cualquier nivel — desde un pin hasta cosplay completo. <strong style="color:var(--yellow)">15% off para cualquiera disfrazado.</strong></p>
+          <ul>
+            <li>Concurso mejor cosplay · jurado externo</li>
+            <li>Premio: $3,000 + cena VIP</li>
+            <li>DJ con set de anime/J-pop</li>
+            <li>Photo booth con escenografía</li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cap">Cap. <strong>60 personas</strong> · 21:00 hrs</span>
+          <a class="wa-cta mono" data-msg="¡Hola! Quiero apartar lugar para Cosplay Friday Night" style="color:var(--yellow);letter-spacing:.2em;font-size:11px;text-transform:uppercase;border-bottom:1px solid var(--yellow);padding-bottom:3px">Apartar lugar →</a>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="head">
+          <div class="ja-big brush">映</div>
+          <div class="when">MAR · 1× MES</div>
+        </div>
+        <div class="body">
+          <h3>Anime Movie Night<span class="ja brush">映画</span></h3>
+          <p>Proyección mensual de película anime de culto. Subtítulos en español. Menú especial maridado a la película de la noche.</p>
+          <ul>
+            <li>1 película curada al mes</li>
+            <li>Menú especial maridado</li>
+            <li>Subtítulos en ES</li>
+            <li>Próximas: Akira · Perfect Blue · Spirited Away</li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cap">Cap. <strong>40 personas</strong> · 20:00 hrs</span>
+          <a class="wa-cta mono" data-msg="¡Hola! Quiero apartar lugar para Anime Movie Night" style="color:var(--fucsia);letter-spacing:.2em;font-size:11px;text-transform:uppercase;border-bottom:1px solid var(--fucsia);padding-bottom:3px">Apartar lugar →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESERVE + LOCATION ============================== -->
+<section class="reserve" id="reserva">
+  <div class="wrap">
+    <div class="res-grid">
+
+      <div class="res-info">
+        <span class="eyebrow">Reservas · 予約</span>
+        <h2>Aparta tu <em>mesa</em>. <span class="brush">席</span></h2>
+        <p class="lede">
+          Reservas <strong>directas por WhatsApp</strong> — sin formularios, sin esperas. Respuesta en menos de 5 minutos en horario de cocina. Eventos privados y grupos &gt; 8 con 24 h de anticipación.
+        </p>
+
+        <div class="res-meta">
+          <div class="row"><span class="k">Horario</span><span class="v">Mar—Dom · 18:00 a 01:00<small>Cocina cierra 30 min antes</small></span></div>
+          <div class="row"><span class="k">Mesas</span><span class="v">14 mesas · barra para 10<small>Capacidad total: 48 personas</small></span></div>
+          <div class="row"><span class="k">Privados</span><span class="v">Desde 8 hasta 30 personas<small>Renta total los lunes</small></span></div>
+          <div class="row"><span class="k">Política</span><span class="v">Tolerancia 15 min<small>Liberamos mesa al minuto 16</small></span></div>
+        </div>
+
+        <div class="res-cta">
+          <a class="btn xl wa-cta" data-msg="¡Hola ONIBI! Quiero reservar mesa. Fecha:  · Personas: ">
+            <svg class="ico"><use href="#i-wa"/></svg> Reservar mesa
+          </a>
+          <a class="btn cyan wa-cta" data-msg="¡Hola ONIBI! Quiero info de evento privado. Personas:  · Fecha: ">
+            <svg class="ico"><use href="#i-wa"/></svg> Evento privado
+          </a>
+        </div>
+      </div>
+
+      <div class="loc-card" id="ubicacion">
+        <div class="map">
+          <div class="meta-top">
+            <span><span class="dot"></span> LEÓN · GTO · 20.95°N</span>
+            <span>SECTOR / 04</span>
+          </div>
+          <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <pattern id="gridn" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,80,200,0.08)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="600" height="450" fill="url(#gridn)"/>
+            <path d="M 0 220 Q 200 200 320 250 T 600 240" stroke="rgba(57,224,255,0.18)" stroke-width="2" fill="none"/>
+            <path d="M 280 0 L 320 450" stroke="rgba(255,80,200,0.12)" stroke-width="1" fill="none"/>
+            <path d="M 100 100 L 540 380" stroke="rgba(255,80,200,0.08)" stroke-width="1" fill="none"/>
+            <!-- block shapes -->
+            <rect x="180" y="160" width="240" height="160" fill="rgba(255,255,255,0.025)" stroke="rgba(57,224,255,0.3)" stroke-width="1"/>
+            <rect x="200" y="180" width="80" height="60" fill="rgba(57,224,255,0.05)" stroke="rgba(57,224,255,0.2)" stroke-width="1"/>
+            <rect x="300" y="180" width="100" height="50" fill="rgba(57,224,255,0.05)" stroke="rgba(57,224,255,0.2)" stroke-width="1"/>
+            <rect x="200" y="260" width="200" height="50" fill="rgba(57,224,255,0.05)" stroke="rgba(57,224,255,0.2)" stroke-width="1"/>
+            <!-- pin -->
+            <g transform="translate(320,230)">
+              <circle r="28" fill="rgba(255,45,184,0.18)" stroke="rgba(255,45,184,0.55)" stroke-width="1"/>
+              <circle r="14" fill="rgba(255,45,184,0.4)"/>
+              <circle r="6" fill="#ff2db8"/>
+              <text x="0" y="-42" text-anchor="middle" fill="#ff2db8" font-family="Bebas Neue, sans-serif" font-size="16" letter-spacing="3">ONIBI</text>
+              <text x="0" y="55" text-anchor="middle" fill="#39e0ff" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">AQUÍ</text>
+            </g>
+            <text x="490" y="100" fill="rgba(255,255,255,0.3)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">PLAZA CAMPESTRE</text>
+            <text x="100" y="380" fill="rgba(255,255,255,0.3)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">BLVD. ADOLFO</text>
+          </svg>
+        </div>
+        <div class="info">
+          <div class="top">
+            <h3>Cómo llegar</h3>
+            <span class="badge">SECT. 04</span>
+          </div>
+          <p>Local 12 · planta baja. Estacionamiento del centro comercial gratis con ticket validado en la barra.</p>
+          <div class="lines">
+            <div class="row"><span class="k">Dirección</span><span class="v">Blvd. Reservado 1234</span></div>
+            <div class="row"><span class="k">Colonia</span><span class="v">Campestre · León, Gto.</span></div>
+            <div class="row"><span class="k">CP</span><span class="v">37160</span></div>
+            <div class="row"><span class="k">Tel</span><span class="v">(477) 000 · 0000</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- hazard strip 2 -->
+<div class="hazard" aria-hidden="true">
+  <div class="hazard-track">
+    <span>
+      LA NOCHE ES JOVEN <span class="dot"></span> <span class="kanji">夜</span> YORU <span class="dot"></span>
+      OPEN HASTA 01:00 <span class="dot"></span> RAMEN · ONIGIRI · MOCHI <span class="dot"></span>
+      <span class="kanji">注文</span> ORDER NOW <span class="dot"></span>
+    </span>
+    <span>
+      LA NOCHE ES JOVEN <span class="dot"></span> <span class="kanji">夜</span> YORU <span class="dot"></span>
+      OPEN HASTA 01:00 <span class="dot"></span> RAMEN · ONIGIRI · MOCHI <span class="dot"></span>
+      <span class="kanji">注文</span> ORDER NOW <span class="dot"></span>
+    </span>
+  </div>
+</div>
+
+<!-- ============================== FINAL CTA ============================== -->
+<section class="final">
+  <div class="wrap">
+    <div class="inner">
+      <h2 class="display">
+        <span class="glow">VEN.</span>
+        <span class="cy glow-cyan">COME.</span>
+        <em>QUÉDATE.</em>
+      </h2>
+      <p>Reserva tu mesa, escoge tu noche, trae a la banda. Los jueves trivia, los viernes evento, los domingos karaoke. <strong style="color:var(--ink)">Hoy también cuenta.</strong></p>
+
+      <div class="ctas">
+        <a class="btn xl wa-cta" data-msg="¡Hola ONIBI! Quiero reservar mesa esta semana">
+          <svg class="ico"><use href="#i-wa"/></svg> Reservar por WhatsApp
+        </a>
+        <a class="btn ghost cyan" href="#menu" style="border-color:var(--cyan);color:var(--cyan)">Ver menú completo →</a>
+      </div>
+
+      <div class="open-now"><span class="dot"></span> COCINA ABIERTA AHORA · CIERRA EN 02:14:32</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="brand-block">
+        <span class="mark">ONIBI</span><span class="kj brush">鬼火</span>
+        <p>Restaurante temático de ramen y comida japonesa de calle. León, Gto. La noche, neón y la cocina abierta hasta tarde. Desde 2024.</p>
+      </div>
+      <div>
+        <h4>Explorar</h4>
+        <ul>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#galeria">El lugar</a></li>
+          <li><a href="#eventos">Eventos del mes</a></li>
+          <li><a href="#ubicacion">Cómo llegar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Reservar</h4>
+        <ul>
+          <li><a class="wa-cta" data-msg="¡Hola ONIBI! Quiero reservar mesa">WhatsApp · reservas</a></li>
+          <li><span class="item">Tel · (477) 000 0000</span></li>
+          <li><span class="item">Mar–Dom · 18:00–01:00</span></li>
+          <li><span class="item">Privados · Lunes</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <ul>
+          <li><a href="#">Instagram · @onibi.leon</a></li>
+          <li><a href="#">TikTok · @onibi.leon</a></li>
+          <li><a href="#">Spotify · ONIBI Sound</a></li>
+          <li><a class="wa-cta" data-msg="¡Hola! Quiero estar en el canal de eventos">Canal de eventos · WA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <div>© 2026 ONIBI 鬼火 — León, Gto. · Cocina hasta tarde</div>
+      <div>Hecho con ramen, neón y noche</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // WhatsApp builder
+  const WA_PHONE = '524770000000'; // placeholder — reemplazar
+  document.querySelectorAll('.wa-cta').forEach(el => {
+    const msg = el.dataset.msg || '¡Hola ONIBI! Quiero reservar mesa';
+    el.setAttribute('href', `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`);
+    el.setAttribute('target', '_blank');
+    el.setAttribute('rel', 'noopener');
+  });
+
+  // nav scrolled
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // menu category pills toggle (cosmetic — single active)
+  document.querySelectorAll('.cat-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
